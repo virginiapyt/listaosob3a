@@ -1,0 +1,60 @@
+﻿<Window x:Class="listaosob3a.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:listaosob3a"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Label Content="Wyszukaj wg nazwiska" Margin="10"/>
+        <TextBox x:Name="txtSzukaj" Grid.Column="1"  Margin="10" TextChanged="txtSzukaj_TextChanged"/>
+        <ListView ItemsSource="{Binding Listaosob}" 
+                  SelectedItem="{Binding wybranaOsoba}"
+                  Grid.Row="1" Grid.ColumnSpan="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Imie}" 
+                                    Header="Imię"/>
+                    <GridViewColumn Header="Nazwisko">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Nazwisko}"
+                                           FontSize="14" 
+                                           Foreground ="Blue"
+                                           TextAlignment="Right"
+                                           Background="red">
+                                    
+                                </TextBlock>
+                            </DataTemplate>                            
+                        </GridViewColumn.CellTemplate>
+                        
+                        
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Dataur}" 
+                                    Header="Data urodzenia"/>
+                </GridView>
+            </ListView.View> 
+        </ListView>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal">
+            <Button Content="Dodaj" Click="dodaj_Click" Margin="20 5 20 5 " x:Name="dodaj"/>
+            <Button Content="Edytuj" Click="edytuj_Click" Margin="20 5 20 5 " x:Name="edytuj"/>
+            <Button Content="Usun" Click="usun_Click"  Margin="20 5 20 5 " x:Name="usun"/>
+        </StackPanel>
+    </Grid>
+</Window>
